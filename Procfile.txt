@@ -1,2 +1,2 @@
-worker: command_to_run_your_worker
-heroku ps:scale web=0
+worker: worker: node index.js
+
