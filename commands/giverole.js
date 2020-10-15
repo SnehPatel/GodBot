@@ -6,10 +6,14 @@ module.exports = {
 	execute(message, args) {
 
     let role = message.guild.roles.cache.find(r => r.name === args[1]);
-    let member = message.mentions.members.first();
+    let targetMember = message.mentions.members.first();
     
-    member.roles.add(role).catch(console.error);
+    if(message.member.hasPermission('ADMINISTRATOR')){
+        targetMember.roles.add(role).catch(console.error);
+    }
+
     console.log(member);
+    
     message.channel.send(member.user.username + " has been assgined the role " + role.name + ".");
 
     // // let role = message.guild.roles.cache.find(r => r.name === "Maplers");
