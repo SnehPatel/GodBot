@@ -1,14 +1,18 @@
 module.exports = (client) => {
-  const channelId = '723984790000238625' //general channel
+  const channelIdGeneral = '723984790000238625' //general channel
 
   client.on('guildMemberAdd', (member) => {
     console.log(member)
 
-    const message = `Please welcome <@${member.id}> to the server!`
+    const message = `Welcome <@${member.id}>, to the TowerOfG0d!`
 
-    const channel = member.guild.channels.cache.get(channelId)
+    const channelGeneral = member.guild.channels.cache.get(channelIdGeneral)
 
-    channel.send(message)
+    member.roles.add('741833607051477032').catch(console.error);
+
+    channelGeneral.send(message).then(message=> {
+      message.delete({timeout: 60000})
+    })
 
   })
 

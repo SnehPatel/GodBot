@@ -3,11 +3,13 @@ module.exports = {
 	description: 'Autoroller',
 	execute(message) {
         
-        let count;
+        var count = 0;
+        message.channel.send("$wa");
         while(count != 10){
             setTimeout(() => {
-                message.channel.send("$wa");
-              }, 100)
+                message.channel.send("$wa" + count);
+              }, 2000)
+              console.log(count);
               count++;
         }
 	},
