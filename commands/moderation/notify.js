@@ -20,14 +20,13 @@ module.exports = class GiveRole extends commando.Command {
 
         if (member._roles.includes('769437078655336468')) {
             member.roles.remove('769437078655336468').catch(console.error)
-            message.channel.send("Mudae role successfully removed")
+            // message.channel.send("Mudae role successfully removed")
+            message.react('❌')
         } else {
             member.roles.add('769437078655336468').catch(console.error)
-            message.channel.send("Mudae role successfully added")
-
-        }
-        message.react('✅')
-        
+            // message.channel.send("Mudae role successfully added")
+            message.react('✅')
+        }        
                 // CronJob to notify users with Mudae role of new claim
         let CronJob = require('cron').CronJob;
         let job = new CronJob('36 1,4,7,10,13,16,19,22 * * *', function() {
