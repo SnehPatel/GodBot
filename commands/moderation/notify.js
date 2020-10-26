@@ -27,5 +27,17 @@ module.exports = class GiveRole extends commando.Command {
 
         }
         message.react('✅')
+        
+                // CronJob to notify users with Mudae role of new claim
+        let CronJob = require('cron').CronJob;
+        let job = new CronJob('36 1,4,7,10,13,16,19,22 * * *', function() {
+            var guild = client.guilds.cache.get('723967523548168282');
+            if (guild && guild.channels.cache.get('754566481299243108')) {
+            guild.channels.cache.get('754566481299243108').send("<@&754565733605834824> Claim timer is reset!");
+            } else {
+            console.log("Oh no...");
+            }
+        }, null, true, 'America/Toronto');
+        job.start();
     }
 }
