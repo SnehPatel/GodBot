@@ -28,15 +28,15 @@ module.exports = class teamgen extends commando.Command {
         for(count = 0; count < (team1.length/2) + 1; count++){
             let picked = getRandomInt(0, team1.length);
             
-            console.log("before team2: " + team2);
-            console.log("before team1: " + team1);
-            console.log(picked)
+            // console.log("before team2: " + team2);
+            // console.log("before team1: " + team1);
+            // console.log(picked)
 
             team2.push(args[picked]);
             team1.splice(picked, 1);
             
-            console.log("after team2: " + team2);
-            console.log("after team1: " + team1);
+            // console.log("after team2: " + team2);
+            // console.log("after team1: " + team1);
         }
 
         msg.reply("Team1: " + team1);
