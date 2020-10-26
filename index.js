@@ -15,8 +15,8 @@ client.on('ready', async() => {
 
   client.registry
     .registerGroups([
-      ['random', 'random commands'],
-      ['moderation', 'mod commands']
+      ['random', 'Random Commands'],
+      ['moderation', 'Mod Commands']
     ])
     .registerDefaults()
     .registerCommandsIn(path.join(__dirname, 'commands'))
