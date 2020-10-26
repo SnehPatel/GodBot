@@ -3,6 +3,7 @@ const config = require("./config.json");
 
 const path = require('path')
 const Commando = require('discord.js-commando')
+const welcome = require('./welcome')
 
 const client = new Commando.CommandoClient({
   owner: '268549194816552960',
@@ -20,6 +21,7 @@ client.on('ready', async() => {
     .registerDefaults()
     .registerCommandsIn(path.join(__dirname, 'commands'))
 
+  welcome(client)
 });
 
 // const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
