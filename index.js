@@ -4,6 +4,7 @@ const config = require("./config.json");
 const path = require('path')
 const Commando = require('discord.js-commando')
 const welcome = require('./welcome')
+const mongoServer = require('./server')
 
 const client = new Commando.CommandoClient({
   owner: '268549194816552960',
@@ -17,11 +18,14 @@ client.on('ready', async() => {
     .registerGroups([
       ['random', 'Random Commands'],
       ['moderation', 'Mod Commands'],
-      ['games', 'Game Commands']
+      ['games', 'Game Commands'],
+      ['dbtesting', 'Database Commands']
     ])
     .registerDefaults()
     .registerCommandsIn(path.join(__dirname, 'commands'))
-
+  
+  mongoServer;
+  
   welcome(client)
 });
 
