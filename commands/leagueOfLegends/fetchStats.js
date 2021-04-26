@@ -9,10 +9,17 @@ module.exports = {
     execute(message, args) {
         
         async function getStat(){
+
+        //Checking the character
+        let summoner = args[0];
+        if (summoner.indexOf('ø') > -1)
+        {
+            summoner = summoner.replace("ø","%C3%B8");
+        }
             
         //getting the puuid
         const query = queryString.stringify({term: args.join(' ')});
-        const getPuuid=await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${args}?api_key=RGAPI-d0b3162d-adeb-48ec-8714-bc88efe31cd8`).then(response => response.json());
+        const getPuuid=await fetch(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}?api_key=RGAPI-d0b3162d-adeb-48ec-8714-bc88efe31cd8`).then(response => response.json());
         // console.log(getPuuid.puuid);
 
         //getting match id
