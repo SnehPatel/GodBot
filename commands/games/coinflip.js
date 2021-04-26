@@ -1,17 +1,7 @@
-const commando = require('discord.js-commando');
-
-module.exports = class CoinFlip extends commando.Command {
-    constructor(client) {
-        super(client, {
-            name: 'coinflip',
-            aliases: ['cf'],
-            group: 'random',
-            memberName: 'coinflip',
-            description: 'flips a fuckin coin',
-        })
-    }
-
-    async run(message) {
+module.exports = {
+    name: 'cf',
+    description: 'Flip a coin!',
+    execute(message, args) {
 
         let result = Math.round(Math.random());
 
@@ -20,5 +10,6 @@ module.exports = class CoinFlip extends commando.Command {
         }else{
             message.reply("You got tails!");
         }
-    }
-}
+        
+    },
+};

@@ -1,5 +1,6 @@
 {
     "token":"NzY0MjI0ODY4NDM0MDUxMDky.X4DJ3w.C8L3f-P6B6Gs6GkadTy6v8Ey3vk",
-    "prefix": "!",
-    "mongoURI": "mongodb+srv://goduser:12345@cluster-g0db0t.ppvcd.gcp.mongodb.net/test?retryWrites=true&w=majority"
+    "prefix": "/",
+    "mongoURI": "mongodb+srv://goduser:12345@cluster-g0db0t.ppvcd.gcp.mongodb.net/test?retryWrites=true&w=majority",
+    "leagueKey": "RGAPI-d0b3162d-adeb-48ec-8714-bc88efe31cd8"
 }

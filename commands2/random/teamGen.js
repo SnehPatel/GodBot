@@ -1,12 +1,23 @@
-module.exports = {
-    name: 'teams',
-    description: 'Creates 2 teams from given list of players.',
-    execute(message, args) {
+const commando = require('discord.js-commando');
+
+module.exports = class teamgen extends commando.Command {
+    constructor(client) {
+        super(client, {
+            name: 'teamgen',
+            aliases: ['tg'],
+            group: 'random',
+            memberName: 'teamgen',
+            description: 'creates two teams based on entered names',
+            argsType: 'multiple',
+        })
+
+    }
+    
+    async run(msg, args) {
 
         let count;
         let team1 = args;
         var team2 = [];
-
         function getRandomInt(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -28,7 +39,9 @@ module.exports = {
             // console.log("after team1: " + team1);
         }
 
-        message.reply("Team1: " + team1);
-        message.reply("Team2: " + team2);
-    },
-};
+        msg.reply("Team1: " + team1);
+        msg.reply("Team2: " + team2);
+        
+        
+    }
+}

@@ -15,6 +15,6 @@ module.exports = class dbfetch extends commando.Command {
     }
 
     async run(msg) {
-        Animal.find().sort({ date: -1 }).then(items => console.log(items));
+        // Animal.find().sort({ date: -1 }).then(items => console.log(items));
     }
 }

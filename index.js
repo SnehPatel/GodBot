@@ -1,40 +1,45 @@
-const fs = require('fs');
-const config = require("./config.json");
+const fs = require("fs");
+const Discord = require('discord.js');
+const { prefix, token } = require('./config.json');
+const { MessageEmbed } = require('discord.js');
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+const commandFolders = fs.readdirSync('./commands');
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-const path = require('path')
-const Commando = require('discord.js-commando')
-const welcome = require('./welcome')
-const mongoServer = require('./server')
+const welcome = require("./welcome");
 
-const client = new Commando.CommandoClient({
-  owner: '268549194816552960',
-  commandPrefix: config.prefix
-})
+for (const folder of commandFolders) {
+    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const command = require(`./commands/${folder}/${file}`);
+        client.commands.set(command.name, command);
+    }
+}
 
-client.on('ready', async() => {
-  console.log('G0DB0T is online!');
-
-  client.registry
-    .registerGroups([
-      ['random', 'Random Commands'],
-      ['moderation', 'Mod Commands'],
-      ['games', 'Game Commands'],
-      ['dbtesting', 'Database Commands']
-    ])
-    .registerDefaults()
-    .registerCommandsIn(path.join(__dirname, 'commands'))
-  
-  mongoServer;
-  
-  welcome(client)
+client.once('ready', () => {
+    console.log('GodBot Online!');
 });
 
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-// const prefix = "-";
+client.on('message', message => {
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-// for (const file of commandFiles) {
-//     const command = require(`./commands/${file}`);
-//     client.commands.set(command.name, command)
-// }
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
 
-client.login(config.token);
+    if (!client.commands.has(commandName)) return;
+
+    const command = client.commands.get(commandName);
+
+    try {
+        command.execute(message, args);
+    } catch (error) {
+        console.error(error);
+        message.reply('there was an error trying to execute that command!');
+    }
+
+});
+
+client.login(token);
+
+
