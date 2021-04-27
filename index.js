@@ -2,12 +2,14 @@ const fs = require("fs");
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const { MessageEmbed } = require('discord.js');
+const mongoServer = require('./server')
+
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-const welcome = require("./welcome");
+// const welcome = require("./welcome");
 
 for (const folder of commandFolders) {
     const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
@@ -22,6 +24,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -37,6 +40,8 @@ client.on('message', message => {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
     }
+
+    mongoServer;
 
 });
 
