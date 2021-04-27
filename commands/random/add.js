@@ -1,3 +1,5 @@
+const levels = require("../../models/levels");
+
 module.exports = {
     name: 'add',
     description: 'Adding args!',
@@ -9,6 +11,7 @@ module.exports = {
         for (const arg of args){
             sum += parseInt(arg)
         }
+
         message.reply(`The sum is ${sum}.`)
     },
 };

@@ -2,7 +2,8 @@ const fs = require("fs");
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const { MessageEmbed } = require('discord.js');
-const mongoServer = require('./server')
+const mongoServer = require('./server');
+const levelXP = require("./levelXP");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -19,8 +20,9 @@ for (const folder of commandFolders) {
     }
 }
 
-client.once('ready', () => {
+client.once('ready', async () => {
     console.log('GodBot Online!');
+    levelXP(client)
 });
 
 client.on('message', message => {
