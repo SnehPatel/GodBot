@@ -5,7 +5,7 @@ module.exports = (client) => {
     client.on('message', message =>{
         const {author} = message
 
-        addXP(author.id, 25, message)
+        addXP(author.id, 7, message)
     })
 }
 
@@ -15,16 +15,13 @@ const addXP = async (userID, xpToAdd, message) => {
     const result = await levels.findOneAndUpdate({
         userID
     }, {
-        userID,
         $inc: {
             xp: xpToAdd
         }
-    }, {
-        upsert: true
     })
 
-    let{xp, level} = result
-
+    let {xp, level} = result
+    
     const needed = getNeededXP(level);
 
     if( xp >= needed){
@@ -40,5 +37,5 @@ const addXP = async (userID, xpToAdd, message) => {
         })
     }
 
-    // console.log("Result: ", userID);
+    // console.log("Result: ", result);
 }
