@@ -3,20 +3,42 @@ const levels = require('./models/levels');
 
 module.exports = (client) => {
     client.on('message', message =>{
-        const {member, author} = message
+        const {author} = message
 
-        addXP(author.id, 10)
+        addXP(author.id, 25, message)
     })
 }
 
-const addXP = async (userName, xpToAdd) => {
-        const result = await levels.findOneAndUpdate({
-            userName
+const getNeededXP = level => level * level * 100
+
+const addXP = async (userID, xpToAdd, message) => {
+    const result = await levels.findOneAndUpdate({
+        userID
+    }, {
+        userID,
+        $inc: {
+            xp: xpToAdd
+        }
+    }, {
+        upsert: true
+    })
+
+    let{xp, level} = result
+
+    const needed = getNeededXP(level);
+
+    if( xp >= needed){
+        ++level;
+        xp -= needed;
+        message.reply(`You are now ${level} with ${xp} experience! You need ${getNeededXP(level)} XP to level again!`);
+        console.log(level, xp);
+        await levels.updateOne({
+            userID
         }, {
-            userName,
-            $inc: {
-                xp: xpToAdd
-            }
+            level,
+            xp
         })
-        console.log("Result: ", userName);
+    }
+
+    // console.log("Result: ", userID);
 }
