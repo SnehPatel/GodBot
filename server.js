@@ -64,18 +64,13 @@ mongoose
     
   };
 
-  module.exports.doesUserExist = async function doesUserExist(userId, message){
-    const user = await levels.findOne({userID: userId});
-    if(user){
-      message.channel.send(`${userName} is already registered.`)
-      return false;
-    }
-    const newUser = new levels({
-        userID: userId,
-        name: userName,
-        ign: gameName
-    })
-    message.channel.send(`${userName} has been registered.`)
-    await newUser.save();
-    return newUser;
-  };
+  // // Get User info
+  // module.exports.userInfo = async function userInfo(userId, message){
+  //   const user = await levels.findOne({userID: userId});
+  //   if(user){
+  //     message.channel.send(`${userName} is already registered.`)
+  //     return false;
+  //   }
+
+  //   return newUser;
+  // };
