@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/SnehPatel/GodBot#readme",
   "dependencies": {
+    "canvacord": "^5.2.0",
     "config": "^3.3.3",
     "cron": "^1.8.2",
     "discord.js": "^12.3.1",

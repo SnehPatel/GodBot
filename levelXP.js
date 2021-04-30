@@ -27,7 +27,7 @@ const addXP = async (userID, xpToAdd, message) => {
     if( xp >= needed){
         ++level;
         xp -= needed;
-        message.reply(`You are now ${level} with ${xp} experience! You need ${getNeededXP(level)} XP to level again!`);
+        message.reply(`You are now Level: ${level} with ${xp} experience! You need ${getNeededXP(level)} XP to level again!`);
         console.log(level, xp);
         await levels.updateOne({
             userID
@@ -39,3 +39,5 @@ const addXP = async (userID, xpToAdd, message) => {
 
     // console.log("Result: ", result);
 }
+
+module.exports.getNeededXP = getNeededXP;
