@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js");
 const server = require('../../server');
 
 module.exports = {
-  name: "test",
+  name: "fs",
   description: "Fetch last game of specified summoner name.",
 
   execute(message, args) {

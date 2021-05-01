@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 // const { leagueKey } = require('~/config.json');
 const { MessageEmbed } = require('discord.js');
 module.exports = {
-    name: 'fs',
+    name: 'lg',
     description: 'Fetch last game of specified summoner name.',
 
     execute(message, args) {
