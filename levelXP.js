@@ -1,5 +1,5 @@
 const mongoServer = require('./server')
-const levels = require('./models/levels');
+const userProfile = require('./models/userProfile');
 
 module.exports = (client) => {
     client.on('message', message =>{
@@ -12,7 +12,7 @@ module.exports = (client) => {
 const getNeededXP = level => level * level * 100
 
 const addXP = async (userID, xpToAdd, message) => {
-    const result = await levels.findOneAndUpdate({
+    const result = await userProfile.findOneAndUpdate({
         userID
     }, {
         $inc: {
@@ -29,7 +29,7 @@ const addXP = async (userID, xpToAdd, message) => {
         xp -= needed;
         message.reply(`You are now Level: ${level} with ${xp} experience! You need ${getNeededXP(level)} XP to level again!`);
         console.log(level, xp);
-        await levels.updateOne({
+        await userProfile.updateOne({
             userID
         }, {
             level,

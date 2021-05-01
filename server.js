@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const config = require("./config.json");
 const path = require('path');
-const levels = require('./models/levels');
+const userProfile = require('./models/userProfile');
 const stats = require('./commands/leagueOfLegends/fetchStats');
 const { getNeededXP } = require('./levelXP');
 
@@ -13,12 +13,12 @@ mongoose
   .catch(err => console.log(err));
 
   module.exports.addUser = async function addUser(userId, userName, gameName, message){
-    const user = await levels.findOne({userID: userId});
+    const user = await userProfile.findOne({userID: userId});
     if(user){
       message.channel.send(`${userName} is already registered.`)
       return false;
     }
-    const newUser = new levels({
+    const newUser = new userProfile({
         userID: userId,
         name: userName,
         ign: gameName
@@ -30,7 +30,7 @@ mongoose
 
   //Points to experience
   module.exports.pointToXP = async function pointToXP(gameName, points, message){
-    const result = await levels.findOneAndUpdate({
+    const result = await userProfile.findOneAndUpdate({
       ign: gameName
     }, {
       $inc: {
@@ -51,7 +51,7 @@ mongoose
       let replyName = `<@${userID}>`;
       message.channel.send(`${replyName} is now Level: ${level} with ${xp} experience! You need ${(getNeededXP(level)-xp)}xp for your next level up!`);
       console.log(xp, level);
-      await levels.updateOne({
+      await userProfile.updateOne({
           ign: gameName
       }, {
           level,

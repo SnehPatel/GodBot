@@ -1,4 +1,4 @@
-const levels = require("../../models/levels");
+const levels = require("../../models/userProfile");
 
 module.exports = {
     name: 'add',

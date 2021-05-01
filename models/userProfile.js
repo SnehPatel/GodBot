@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const LevelSchema = new mongoose.Schema({
+const userProfile = new mongoose.Schema({
     userID: {type: String},
     name: {type: String},
     xp: {type: Number, default: 0},
@@ -8,4 +8,4 @@ const LevelSchema = new mongoose.Schema({
     ign: {type: String}
 });
 
-module.exports = mongoose.model('levels', LevelSchema);
+module.exports = mongoose.model('userProfile', userProfile);

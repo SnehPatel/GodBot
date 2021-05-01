@@ -1,6 +1,6 @@
 const canvacord = require("canvacord");
 const { getNeededXP } = require("../../levelXP");
-const levels = require("../../models/levels");
+const userProfile = require("../../models/userProfile");
 const Discord = require("discord.js");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         const user_avatar = message.author.avatar;
         const img = `https://cdn.discordapp.com/avatars/${user}/${user_avatar}.png`;
         
-        levels.findOne({ userID: user }, 'xp level ign name userID', function(err, userInfo){
+        userProfile.findOne({ userID: user }, 'xp level ign name userID', function(err, userInfo){
             if(err) return handleError(err);
             console.log('XP: %i and LEVEL: %i', userInfo.xp, userInfo.level);
 
